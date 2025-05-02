@@ -10,7 +10,7 @@ LCK 팀 정보와 소환사 데이터를 조회할 수 있는 게임 분석 웹�
 React, Vite, Style-components, Git
 
 ## 🖥️ Soft Skill
-Netlify, 
+Netlify
 
 ## 🥺 어려웠던 점
 - Riot API 요청 구조 이해의 어려움
