@@ -12,7 +12,7 @@ React, Vite, Style-components, Git
 ## 🖥️ Soft Skill
 Netlify
 
-## 🥺 어려웠던 점
+## 🥺 문제점
 - Riot API 요청 구조 이해의 어려움
 - 프론트와 백엔드 서버 포트 충돌
 - 프록시 설정 오류
