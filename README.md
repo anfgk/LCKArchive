@@ -1,4 +1,4 @@
-# Game Insight
+# Game Project
 
 ## 🌈 프로젝트 소개
 LCK 팀 정보와 소환사 데이터를 조회할 수 있는 게임 분석 웹사이트입니다.
