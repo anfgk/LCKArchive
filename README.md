@@ -9,7 +9,7 @@ LCK 팀 정보와 소환사 데이터를 조회할 수 있는 게임 분석 웹�
 ## 🌎 Tech
 React, Vite, Style-components, Git
 
-## 🖥️ Soft Skill
+## 🖥️ Other Skill
 Netlify
 
 ## 🥺 문제점
