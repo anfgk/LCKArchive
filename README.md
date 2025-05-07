@@ -1,4 +1,4 @@
-# Game Insight
+# Game Project
 
 ## 🌈 프로젝트 소개
 LCK 팀 정보와 소환사 데이터를 조회할 수 있는 게임 분석 웹사이트입니다.
@@ -9,10 +9,10 @@ LCK 팀 정보와 소환사 데이터를 조회할 수 있는 게임 분석 웹�
 ## 🌎 Tech
 React, Vite, Style-components, Git
 
-## 🖥️ Soft Skill
-Netlify, 
+## 🖥️ Other Skill
+Netlify
 
-## 🥺 어려웠던 점
+## 🥺 문제점
 - Riot API 요청 구조 이해의 어려움
 - 프론트와 백엔드 서버 포트 충돌
 - 프록시 설정 오류
