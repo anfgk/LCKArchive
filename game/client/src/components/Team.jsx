@@ -1,5 +1,5 @@
 import React from "react";
-import { teams } from "../assets/team";
+import { teams } from "../assets/team"; // 팀 데이터 불러오기 (배열 형태로 이미지와 이름 포함)
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -72,8 +72,10 @@ const Team = () => {
     <Wrapper>
       <Inner>
         <Title>2025 LCK 참가팀</Title>
+        {/* 팀 리스트를 담는 그리드 컨테이너 */}
         <Container>
           {teams.map((team) => (
+            // 각 팀 정보를 표시하는 박스, key는 고유 식별자인 team.id 사용
             <div key={team.id}>
               <TeamWrap>
                 <Img src={team.img} alt={team.team} />

@@ -69,7 +69,7 @@ const Ul = styled.ul`
   }
 
   &.active {
-    display: flex;
+    display: flex; // 메뉴 버튼 클릭 시 메뉴 표시
   }
 `;
 
@@ -86,7 +86,7 @@ const MenuButton = styled.button`
 `;
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 메뉴 열림 상태 관리
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen); // 메뉴 열림/닫힘 상태 변경
@@ -97,6 +97,7 @@ const Header = () => {
       <Nav>
         <Photo>
           <a href="/Main">
+            {/* 로고 클릭 시 메인 페이지로 이동 */}
             <img src={logo} alt="Logo" />
           </a>
         </Photo>
