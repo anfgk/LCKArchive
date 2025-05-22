@@ -110,9 +110,13 @@ const Header = () => {
               게임정보
             </a>
           </li>
-          <li>LCK 팀</li>
           <li>
-            <a href="">Game ID</a>
+            <a href="https://www.leagueoflegends.com/ko-kr/champions/">
+              챔피언
+            </a>
+          </li>
+          <li>
+            <a href="https://lolesports.com/ko-KR/">E스포츠</a>
           </li>
           <li>
             <a href="https://www.leagueoflegends.com/ko-kr/news/tags/patch-notes/">
