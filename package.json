@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
-    "build": "cd client && npm install && npm install -g vite && npm run build",
+    "build": "cd client && npm install && NODE_ENV=production npm run build",
     "install-all": "npm install && cd client && npm install && cd ../server && npm install",
     "dev:client": "cd client && npm run dev",
     "dev:server": "cd server && npm run dev",

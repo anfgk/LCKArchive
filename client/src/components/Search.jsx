@@ -3,6 +3,8 @@ import axios from "axios";
 import styled from "styled-components";
 import "./Search.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || window.location.origin;
+
 const SearchContainer = styled.div`
   width: 100%;
   max-width: 1300px;
@@ -256,10 +258,10 @@ const Search = () => {
 
       const [playerResponse, matchesResponse] = await Promise.all([
         axios.get(
-          `http://localhost:4000/api/player-data/${encodedGameName}/${encodedTagLine}`
+          `${API_BASE_URL}/api/player-data/${encodedGameName}/${encodedTagLine}`
         ),
         axios.get(
-          `http://localhost:4000/api/matches/${encodedGameName}/${encodedTagLine}`
+          `${API_BASE_URL}/api/matches/${encodedGameName}/${encodedTagLine}`
         ),
       ]);
 
