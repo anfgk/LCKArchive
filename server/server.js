@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,17 +14,7 @@ if (!RIOT_API_KEY) {
 
 console.log("Using API Key:", RIOT_API_KEY); // API 키 확인
 
-// CORS 설정
-const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? ["https://your-domain.vercel.app"] // 배포 후 실제 도메인으로 변경
-      : ["http://localhost:5173"],
-  methods: ["GET", "POST"],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Riot API 기본 URL
 const RIOT_API_ASIA = "https://asia.api.riotgames.com";
