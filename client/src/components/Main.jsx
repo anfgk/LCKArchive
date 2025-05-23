@@ -17,7 +17,7 @@ const Main = () => {
     <MainSection>
       <VideoWrapper>
         <video autoPlay loop muted>
-          <source src="/public/img/lck.mp4" type="video/mp4" />
+          <source src="/videos/lck.mp4" type="video/mp4" />
         </video>
       </VideoWrapper>
     </MainSection>
