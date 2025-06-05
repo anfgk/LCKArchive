@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import PlayerModal from "./PlayerModal";
 import { player } from "../assets/player";
 
 const ModalBackground = styled.div`
@@ -14,14 +13,22 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 20px;
 `;
 
 const ModalContent = styled.div`
   background-color: #fff;
   padding: 30px;
   border-radius: 15px;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  @media screen and (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -33,6 +40,12 @@ const CloseButton = styled.button`
   font-size: 24px;
   cursor: pointer;
   color: #333;
+  z-index: 1;
+
+  @media screen and (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+  }
 `;
 
 const TeamImage = styled.img`
@@ -41,6 +54,16 @@ const TeamImage = styled.img`
   object-fit: contain;
   margin: 0 auto;
   display: block;
+
+  @media screen and (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const TeamInfo = styled.div`
@@ -51,6 +74,14 @@ const TeamInfo = styled.div`
     font-size: 24px;
     margin-bottom: 15px;
     color: #333;
+
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 18px;
+    }
   }
 `;
 
@@ -59,6 +90,16 @@ const PlayersContainer = styled.div`
   background-color: #f5f5f5;
   border-radius: 10px;
   padding: 20px;
+
+  @media screen and (max-width: 768px) {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 10px;
+    margin-top: 15px;
+  }
 `;
 
 const PlayersList = styled.div`
@@ -66,6 +107,16 @@ const PlayersList = styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: 15px;
   margin-top: 15px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
 `;
 
 const PlayerCard = styled.div`
@@ -74,7 +125,6 @@ const PlayerCard = styled.div`
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
   transition: transform 0.2s ease;
 
   &:hover {
@@ -85,18 +135,46 @@ const PlayerCard = styled.div`
     font-size: 14px;
     color: #666;
     margin-bottom: 5px;
+
+    @media screen and (max-width: 480px) {
+      font-size: 12px;
+    }
   }
 
   p {
     font-size: 16px;
     color: #333;
     font-weight: bold;
+    word-break: break-all;
+
+    @media screen and (max-width: 480px) {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+  }
+`;
+
+const RosterTitle = styled.h3`
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 18px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 `;
 
 const TeamModal = ({ team, onClose }) => {
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
-
   if (!team) return null;
 
   const positions = [
@@ -107,15 +185,6 @@ const TeamModal = ({ team, onClose }) => {
     { key: "support", name: "서포터" },
   ];
 
-  const handlePlayerClick = (playerNickname) => {
-    setSelectedPlayer(playerNickname);
-  };
-
-  const handlePlayerModalClose = () => {
-    setSelectedPlayer(null);
-  };
-
-  // 현재 팀의 정보를 player 배열에서 찾기
   const currentTeamData = player.find((t) => t.Team === team.Team);
 
   return (
@@ -127,29 +196,16 @@ const TeamModal = ({ team, onClose }) => {
           <h2>{currentTeamData.Team}</h2>
         </TeamInfo>
         <PlayersContainer>
-          <h3
-            style={{ textAlign: "center", marginBottom: "20px", color: "#333" }}
-          >
-            2025 시즌 로스터
-          </h3>
+          <RosterTitle>2025 시즌 로스터</RosterTitle>
           <PlayersList>
             {positions.map((position) => (
-              <PlayerCard
-                key={position.key}
-                onClick={() => handlePlayerClick(currentTeamData[position.key])}
-              >
+              <PlayerCard key={position.key}>
                 <h3>{position.name}</h3>
                 <p>{currentTeamData[position.key]}</p>
               </PlayerCard>
             ))}
           </PlayersList>
         </PlayersContainer>
-        {selectedPlayer && (
-          <PlayerModal
-            playerNickname={selectedPlayer}
-            onClose={handlePlayerModalClose}
-          />
-        )}
       </ModalContent>
     </ModalBackground>
   );
