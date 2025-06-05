@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { teams } from "../assets/team"; // 팀 데이터 불러오기 (배열 형태로 이미지와 이름 포함)
 import styled from "styled-components";
+import TeamModal from "./TeamModal";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -68,6 +69,16 @@ const Img = styled.img`
 `;
 
 const Team = () => {
+  const [selectedTeam, setSelectedTeam] = useState(null);
+
+  const handleTeamClick = (team) => {
+    setSelectedTeam(team);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedTeam(null);
+  };
+
   return (
     <Wrapper>
       <Inner>
@@ -77,13 +88,16 @@ const Team = () => {
           {teams.map((team) => (
             // 각 팀 정보를 표시하는 박스, key는 고유 식별자인 team.id 사용
             <div key={team.id}>
-              <TeamWrap>
+              <TeamWrap onClick={() => handleTeamClick(team)}>
                 <Img src={team.img} alt={team.team} />
                 <h2>{team.Team}</h2>
               </TeamWrap>
             </div>
           ))}
         </Container>
+        {selectedTeam && (
+          <TeamModal team={selectedTeam} onClose={handleCloseModal} />
+        )}
       </Inner>
     </Wrapper>
   );
