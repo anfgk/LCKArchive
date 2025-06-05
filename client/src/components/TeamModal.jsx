@@ -121,7 +121,7 @@ const PlayersList = styled.div`
 
 const PlayerCard = styled.div`
   text-align: center;
-  padding: 10px;
+  padding: 3px 3px 10px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -142,7 +142,7 @@ const PlayerCard = styled.div`
   }
 
   p {
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
     font-weight: bold;
     word-break: break-all;
