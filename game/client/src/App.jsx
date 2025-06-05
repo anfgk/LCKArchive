@@ -10,10 +10,10 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
 
   :root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --background-color: #111;
-    --text-color: #fff;
+    --primary-color: ${(props) => props.theme.colors.primary};
+    --secondary-color: ${(props) => props.theme.colors.secondary};
+    --background-color: ${(props) => props.theme.colors.background};
+    --text-color: ${(props) => props.theme.colors.text};
   }
 
   * {

@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,6 +16,10 @@ if (!RIOT_API_KEY) {
 console.log("Using API Key:", RIOT_API_KEY); // API 키 확인
 
 app.use(cors());
+app.use(express.json());
+
+// 클라이언트 빌드 파일 서빙
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // Riot API 기본 URL
 const RIOT_API_ASIA = "https://asia.api.riotgames.com";
@@ -323,16 +328,23 @@ function handleApiError(error, res) {
   });
 }
 
+// 모든 다른 GET 요청을 React 앱으로 라우팅
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+
+// 404 핸들러를 라우터 마지막에 배치
 app.use((req, res) => {
   res.status(404).json({ message: "요청하신 경로를 찾을 수 없습니다." });
 });
 
+// 에러 핸들러
 app.use((err, req, res, next) => {
   console.error("Server Error:", err);
   res.status(500).json({ message: "서버 오류가 발생했습니다." });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
 });

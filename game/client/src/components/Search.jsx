@@ -3,79 +3,90 @@ import axios from "axios";
 import styled from "styled-components";
 import "./Search.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || window.location.origin;
+
 const SearchContainer = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
 `;
 
 const SearchForm = styled.form`
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  justify-content: center;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
 `;
 
 const InputGroup = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   width: 100%;
-  max-width: 600px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Input = styled.input`
-  padding: 12px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  border: 2px solid transparent;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
-  font-size: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: ${(props) => props.theme.colors.text};
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: ${(props) => props.theme.colors.primary};
+    background: rgba(255, 255, 255, 0.1);
+  }
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.5);
   }
-
-  &:focus {
-    outline: none;
-    border-color: var(--primary-color);
-  }
-`;
-
-const GameNameInput = styled(Input)`
-  flex: 2;
-`;
-
-const TagLineInput = styled(Input)`
-  flex: 1;
-  min-width: 100px;
 `;
 
 const SearchButton = styled.button`
-  padding: 12px 24px;
-  background: var(--primary-color);
+  width: 200px;
+  background: ${(props) => props.theme.colors.primary};
   color: white;
+  border: none;
   border-radius: 8px;
+  font-size: 1.1rem;
   font-weight: 600;
-  transition: background-color 0.2s;
+  cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: #0056b3;
+    background: ${(props) => props.theme.colors.secondary};
   }
 
   &:disabled {
-    background: #ccc;
+    background: #666;
     cursor: not-allowed;
   }
+`;
+
+const ErrorMessage = styled.div`
+  color: ${(props) => props.theme.colors.error};
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 1rem;
 `;
 
 const PlayerInfoContainer = styled.div`
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 2rem;
   margin-top: 2rem;
-  color: #fff;
+  color: ${(props) => props.theme.colors.text};
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 `;
 
 const PlayerHeader = styled.div`
@@ -83,57 +94,74 @@ const PlayerHeader = styled.div`
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const ProfileIcon = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 3px solid var(--primary-color);
+  border: 4px solid ${(props) => props.theme.colors.primary};
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
 `;
 
 const PlayerName = styled.div`
   h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    color: ${(props) => props.theme.colors.primary};
   }
 
   p {
-    color: #aaa;
+    font-size: 1.2rem;
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 
 const RankInfo = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 `;
 
 const RankCard = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
-    color: var(--primary-color);
+    color: ${(props) => props.theme.colors.primary};
   }
 
   p {
-    margin: 0.5rem 0;
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
   }
 `;
 
 const MatchHistoryContainer = styled.div`
-  margin-top: 2rem;
+  margin-top: 3rem;
 `;
 
 const MatchHistoryHeader = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: ${(props) => props.theme.colors.primary};
+  text-align: center;
 `;
 
 const MatchList = styled.div`
@@ -143,13 +171,19 @@ const MatchList = styled.div`
 `;
 
 const MatchCard = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
   padding: 1.5rem;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 2rem;
   align-items: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.08);
+  }
 
   .champion-info {
     display: flex;
@@ -158,29 +192,47 @@ const MatchCard = styled.div`
   }
 
   .champion-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    border: 2px solid ${(props) => props.theme.colors.primary};
   }
 
   .match-details {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.8rem;
   }
 
   .match-stats {
     display: flex;
     gap: 2rem;
+    font-size: 1.1rem;
   }
 
   .result {
+    font-size: 1.2rem;
     font-weight: bold;
     &.victory {
-      color: #00bba3;
+      color: ${(props) => props.theme.colors.success};
     }
     &.defeat {
-      color: #ff4e50;
+      color: ${(props) => props.theme.colors.error};
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    .champion-info {
+      justify-content: center;
+    }
+
+    .match-stats {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
     }
   }
 `;
@@ -204,13 +256,12 @@ const Search = () => {
       const encodedGameName = encodeURIComponent(gameName.trim());
       const encodedTagLine = encodeURIComponent(tagLine.trim());
 
-      // 플레이어 정보와 매치 히스토리를 동시에 가져오기
       const [playerResponse, matchesResponse] = await Promise.all([
         axios.get(
-          `http://localhost:4000/api/player-data/${encodedGameName}/${encodedTagLine}`
+          `${API_BASE_URL}/api/player-data/${encodedGameName}/${encodedTagLine}`
         ),
         axios.get(
-          `http://localhost:4000/api/matches/${encodedGameName}/${encodedTagLine}`
+          `${API_BASE_URL}/api/matches/${encodedGameName}/${encodedTagLine}`
         ),
       ]);
 
@@ -248,14 +299,14 @@ const Search = () => {
     <SearchContainer>
       <SearchForm onSubmit={handleSubmit}>
         <InputGroup>
-          <GameNameInput
+          <Input
             type="text"
             value={gameName}
             onChange={(e) => setGameName(e.target.value)}
             placeholder="게임 닉네임"
             required
           />
-          <TagLineInput
+          <Input
             type="text"
             value={tagLine}
             onChange={(e) => setTagLine(e.target.value)}
@@ -264,10 +315,11 @@ const Search = () => {
           />
         </InputGroup>
         <SearchButton type="submit" disabled={isLoading}>
-          {isLoading ? "검색 중..." : "검색"}
+          {isLoading ? "검색 중..." : "전적 검색"}
         </SearchButton>
       </SearchForm>
-      {error && <div className="error-message">{error}</div>}
+
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       {playerData && (
         <PlayerInfoContainer>
