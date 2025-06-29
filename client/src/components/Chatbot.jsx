@@ -188,7 +188,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "안녕하세요! LCK.GG AI 어시스턴트입니다. LCK 관련 질문이 있으시면 언제든 물어보세요! 😊",
+      text: "안녕하세요! LCK 관련 문의하기 챗봇입니다. LCK 관련 질문이 있으시면 언제든 물어보세요! 😊",
       isUser: false,
       timestamp: new Date()
     }
@@ -206,6 +206,7 @@ const Chatbot = () => {
   }, [messages]);
 
   // AI 응답 생성 함수
+
   const generateAIResponse = (userMessage) => {
     const responses = {
       "안녕": "안녕하세요! LCK.GG에 오신 것을 환영합니다! 😊",
