@@ -119,8 +119,8 @@ const Header = () => {
             <a href="https://lolesports.com/ko-KR/">E스포츠</a>
           </li>
           <li>
-            <a href="https://www.leagueoflegends.com/ko-kr/news/tags/patch-notes/">
-              패치노트
+            <a href="https://lolesports.com/ko-KR/leagues/lck">
+              경기일정
             </a>
           </li>
         </Ul>

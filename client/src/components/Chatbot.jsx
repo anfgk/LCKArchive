@@ -39,7 +39,6 @@ const ChatWindow = styled.div`
   width: 350px;
   height: 500px;
   background: rgba(0, 0, 0, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -68,6 +67,7 @@ const ChatTitle = styled.div`
   align-items: center;
   gap: 10px;
   font-weight: bold;
+
 `;
 
 const CloseButton = styled.button`
