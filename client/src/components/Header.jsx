@@ -106,8 +106,8 @@ const Header = () => {
         </MenuButton>
         <Ul className={isMenuOpen ? "active" : ""}>
           <li>
-            <a href="https://www.leagueoflegends.com/ko-kr/how-to-play/">
-              게임정보
+            <a href="">
+              홈
             </a>
           </li>
           <li>
@@ -121,11 +121,6 @@ const Header = () => {
           <li>
             <a href="https://www.leagueoflegends.com/ko-kr/news/tags/patch-notes/">
               패치노트
-            </a>
-          </li>
-          <li>
-            <a href="">
-              커뮤니티
             </a>
           </li>
         </Ul>

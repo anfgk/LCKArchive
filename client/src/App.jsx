@@ -5,6 +5,7 @@ import Main from "./components/Main";
 import Team from "./components/Team";
 import Search from "./components/Search";
 import Footer from "./components/Footer";
+import Chatbot from "./components/Chatbot";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -67,6 +68,7 @@ function App() {
         <Search />
       </section>
       <Footer />
+      <Chatbot />
     </>
   );
 }
