@@ -123,6 +123,11 @@ const Header = () => {
               패치노트
             </a>
           </li>
+          <li>
+            <a href="">
+              커뮤니티
+            </a>
+          </li>
         </Ul>
       </Nav>
     </HeaderWrap>
