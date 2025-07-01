@@ -12,7 +12,7 @@ const MainSection = styled.section`
 const SliderContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@ const SlideContainer = styled.div`
 `;
 
 const Slide = styled.div`
-  width: ${props => 100 / props.totalSlides}%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -51,38 +51,12 @@ const Slide = styled.div`
 `;
 
 const SlideImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 15px;
+  width: 100%;
+  height: 100%;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
 `;
 
-const SlideOverlay = styled.div`
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  right: 0;
-  color: white;
-  padding: 20px;
-  text-align: center;
-`;
-
-const SlideTitle = styled.h2`
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 0px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-
-  @media screen and (max-width: 768px) {
-    font-size: 1.5rem;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 1.2rem;
-  }
-`;
 
 const NavButton = styled.button`
   position: absolute;
@@ -127,7 +101,7 @@ const NextButton = styled(NavButton)`
 
 const Indicators = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -185,9 +159,6 @@ const Main = () => {
                   src={team.img} 
                   alt={team.Team} 
                 />
-                <SlideOverlay>
-                  <SlideTitle>{team.Team}</SlideTitle>
-                </SlideOverlay>
               </Slide>
             ))}
           </SlideContainer>
