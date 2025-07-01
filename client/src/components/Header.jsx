@@ -26,7 +26,8 @@ const Nav = styled.nav`
 
 const Photo = styled.div`
   img {
-    width: 120px;
+    width: 80px;
+    height: 80px;
     transition: transform 0.3s ease;
     @media screen and (max-width: 390px) {
       width: 100px;
