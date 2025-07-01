@@ -12,7 +12,7 @@ const MainSection = styled.section`
 const SliderContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 85vh;
+  height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,6 +53,7 @@ const Slide = styled.div`
 const SlideImage = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: contain;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
 `;
@@ -99,30 +100,52 @@ const NextButton = styled(NavButton)`
   right: 20px;
 `;
 
-const Indicators = styled.div`
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  transform: translateX(-50%);
+
+
+const SlideOverlay = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 150px;
+  padding-top: 30px;
+`;  
+
+const Title = styled.h2`
+  font-size: 2.5rem;
+  font-weight: bold;
+
+`;
+
+const Des = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.2rem;
+`;
+
+const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
-  z-index: 10;
+  padding-top: 10px;
 `;
 
-const Indicator = styled.button`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background: ${props => props.active ? 'white' : 'rgba(255, 255, 255, 0.5)'};
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: ${props => props.active ? 'white' : 'rgba(255, 255, 255, 0.8)'};
-    transform: scale(1.2);
-  }
+const Button = styled.button`
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: 1px solid #fff;
 `;
+
+const SecondButton = styled.button`
+  background-color: #fff;
+  color: #000;
+  padding: 10px 20px;
+  border: 1px solid #000;
+`;
+
 
 const Main = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -172,17 +195,17 @@ const Main = () => {
           <FaChevronRight />
         </NextButton>
 
-        <Indicators>
-          {main.map((_, index) => (
-            <Indicator
-              key={index}
-              active={index === currentSlide}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </Indicators>
       </SliderContainer>
+        <SlideOverlay>
+          <Title>LCK와 <br /> 함께하는 E-Sports</Title>
+          <Des>
+          <Subtitle>LCK는 최고의 팀과 선수들이 모인 리그입니다. <br /> 당신의 게임 여정을 함께하며 승리를 향해 나아가세요!</Subtitle>
+          <ButtonContainer>
+          <Button>자세히 보기</Button>
+          <SecondButton>가입하기</SecondButton>
+          </ButtonContainer>
+          </Des>
+        </SlideOverlay>
     </MainSection>
   );
 };

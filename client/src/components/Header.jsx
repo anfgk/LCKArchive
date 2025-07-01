@@ -5,7 +5,7 @@ import logo from "../../public/img/logo.svg";
 const HeaderWrap = styled.header`
   position: fixed;
   width: 100%;
-  height: 80px;
+  height: 70px;
   background: #111;
   display: flex;
   z-index: 1000;
@@ -17,7 +17,7 @@ const Nav = styled.nav`
   align-items: center;
   width: 95%;
   gap: 40px;
-  padding-left: 50px;
+  padding-left: 60px;
 
   @media screen and (max-width: 390px) {
     padding-left: 20px;
@@ -26,8 +26,8 @@ const Nav = styled.nav`
 
 const Photo = styled.div`
   img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     transition: transform 0.3s ease;
     @media screen and (max-width: 390px) {
       width: 100px;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaInstagram, FaYoutube } from "react-icons/fa";
+import logo from "../../public/img/logo.svg";
 
 const FooterContainer = styled.footer`
   background-color: ${(props) => props.theme.colors.background};
@@ -9,78 +9,62 @@ const FooterContainer = styled.footer`
   margin-top: 4rem;
 `;
 
+const Photo = styled.div`
+  img {
+    width: 60px;
+    height: 60px;
+    margin-left: 170px;
+    transition: transform 0.3s ease;
+    @media screen and (max-width: 390px) {
+      width: 100px;
+    }
+  }
+  img:hover {
+    transform: scale(1.1); /* 확대 효과 */
+  }
+`;
+
 const FooterContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 20px;
   gap: 2rem;
 `;
 
 const FooterSection = styled.div`
-  h3 {
-    color: ${(props) => props.theme.colors.primary};
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    margin-bottom: 0.5rem;
-  }
-
-  a {
-    color: ${(props) => props.theme.colors.text};
-    text-decoration: none;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: ${(props) => props.theme.colors.primary};
-    }
-  }
+  display: flex;
+  gap: 10px;
 `;
 
-const Copyright = styled.div`
-  text-align: center;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid ${(props) => props.theme.colors.secondary};
-  color: ${(props) => props.theme.colors.secondary};
+const FooterText = styled.div`
+  display: flex;
+  gap: 10px;
+  text-decoration: underline;
+  padding-top: 60px;
+  margin-left: 173px;
 `;
 
 const Footer = () => {
   return (
     <FooterContainer>
+        <Photo>
+          <a href="/Main">
+            {/* 로고 클릭 시 메인 페이지로 이동 */}
+            <img src={logo} alt="Logo" />
+          </a>
+        </Photo>
       <FooterContent>
         <FooterSection>
-          <h3>About LCK.GG</h3>
-          <p>리그 오브 레전드 전적 검색 및 프로게임 정보 제공</p>
-        </FooterSection>
-        <FooterSection>
-          <h3>SNS</h3>
-          <ul>
-            <li>
-              <a href="https://www.instagram.com/lckofficial">인스타그램</a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/@LCK">유튜브</a>
-            </li>
-          </ul>
-        </FooterSection>
-        <FooterSection>
-          <h3>Contact</h3>
-          <ul>
-            <li>Email: support@lck.gg</li>
-            <li>Discord: LCK.GG</li>
-          </ul>
+          <li>팀 소개</li>
+          <li>대회 일정</li>
+          <li>커뮤니티</li>
         </FooterSection>
       </FooterContent>
-      <Copyright>© 2024 LCK.GG. All rights reserved.</Copyright>
+      <FooterText>
+        <li>개인정보 처리방침</li>
+        <li>서비스 이용약관</li>
+        <li>고객센터</li>
+      </FooterText>
     </FooterContainer>
   );
 };
