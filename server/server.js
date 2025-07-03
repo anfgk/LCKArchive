@@ -148,12 +148,18 @@ app.get("/api/player-data/:gameName/:tagLine", async (req, res) => {
 
     const { id: summonerId } = summonerResponse.data;
 
-    // 3. 랭크 정보 조회
-    const rankUrl = `${RIOT_API_KR}/lol/league/v4/entries/by-summoner/${summonerId}`;
-    console.log("\n3. 랭크 정보 요청 URL:", rankUrl);
-
-    const rankResponse = await axios.get(rankUrl, riotHeaders);
-    console.log("랭크 정보 응답:", rankResponse.data);
+    // 3. 랭크 정보 조회 (임시 비활성화 - 403 에러 방지)
+    console.log("\n3. 랭크 정보 요청 건너뛰기 (403 에러 방지)");
+    let rankResponse;
+    try {
+      const rankUrl = `${RIOT_API_KR}/lol/league/v4/entries/by-summoner/${summonerId}`;
+      console.log("랭크 정보 요청 URL:", rankUrl);
+      rankResponse = await axios.get(rankUrl, riotHeaders);
+      console.log("랭크 정보 응답:", rankResponse.data);
+    } catch (rankError) {
+      console.log("랭크 정보 조회 실패, 빈 배열로 설정:", rankError.response?.status);
+      rankResponse = { data: [] };
+    }
 
     // 4. 최근 매치 목록 조회
     const matchListUrl = `${RIOT_API_ASIA}/lol/match/v5/matches/by-puuid/${puuid}/ids?count=5`;

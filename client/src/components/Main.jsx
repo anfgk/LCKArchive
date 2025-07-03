@@ -35,9 +35,9 @@ const SlideWrapper = styled.div`
 
 const SlideContainer = styled.div`
   display: flex;
-  width: ${props => props.totalSlides * 100}%;
+  width: ${props => props.$totalSlides * 100}%;
   height: 100%;
-  transform: translateX(-${props => props.currentSlide * (100 / props.totalSlides)}%);
+  transform: translateX(-${props => props.$currentSlide * (100 / props.$totalSlides)}%);
   transition: transform 0.5s ease-in-out;
 `;
 
@@ -175,9 +175,9 @@ const Main = () => {
     <MainSection>
       <SliderContainer>
         <SlideWrapper>
-          <SlideContainer currentSlide={currentSlide} totalSlides={main.length}>
+          <SlideContainer $currentSlide={currentSlide} $totalSlides={main.length}>
             {main.map((team, index) => (
-              <Slide key={team.id} totalSlides={main.length}>
+              <Slide key={team.id}>
                 <SlideImage 
                   src={team.img} 
                   alt={team.Team} 

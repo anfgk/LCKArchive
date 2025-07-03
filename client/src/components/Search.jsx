@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import "./Search.css";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || window.location.origin;
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const SearchContainer = styled.div`
   width: 100%;
@@ -335,26 +335,34 @@ const Search = () => {
           </PlayerHeader>
 
           <RankInfo>
-            {playerData.rankInfo.map((rank, index) => (
-              <RankCard key={index}>
-                <h3>
-                  {rank.queueType === "RANKED_SOLO_5x5"
-                    ? "솔로 랭크"
-                    : "자유 랭크"}
-                </h3>
-                <p>
-                  티어: {rank.tier} {rank.rank}
-                </p>
-                <p>리그 포인트: {rank.leaguePoints}LP</p>
-                <p>
-                  승/패: {rank.wins}승 {rank.losses}패
-                </p>
-                <p>
-                  승률:{" "}
-                  {((rank.wins / (rank.wins + rank.losses)) * 100).toFixed(1)}%
-                </p>
+            {playerData.rankInfo && playerData.rankInfo.length > 0 ? (
+              playerData.rankInfo.map((rank, index) => (
+                <RankCard key={index}>
+                  <h3>
+                    {rank.queueType === "RANKED_SOLO_5x5"
+                      ? "솔로 랭크"
+                      : "자유 랭크"}
+                  </h3>
+                  <p>
+                    티어: {rank.tier} {rank.rank}
+                  </p>
+                  <p>리그 포인트: {rank.leaguePoints}LP</p>
+                  <p>
+                    승/패: {rank.wins}승 {rank.losses}패
+                  </p>
+                  <p>
+                    승률:{" "}
+                    {((rank.wins / (rank.wins + rank.losses)) * 100).toFixed(1)}%
+                  </p>
+                </RankCard>
+              ))
+            ) : (
+              <RankCard>
+                <h3>랭크 정보</h3>
+                <p>랭크 정보를 가져올 수 없습니다.</p>
+                <p>API 권한 문제로 인해 랭크 정보를 표시할 수 없습니다.</p>
               </RankCard>
-            ))}
+            )}
           </RankInfo>
 
           <MatchHistoryContainer>
