@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaFacebookF, FaInstagram, FaTwitter, FaEnvelope, FaYoutube, FaSyncAlt } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaSyncAlt } from "react-icons/fa";
 
 const FooterBg = styled.footer`
   width: 100vw;
@@ -45,7 +45,7 @@ const SNSIcon = styled.a`
   justify-content: center;
   font-size: 1.5rem;
   transition: background 0.2s;
-  &:hover { background: #4ee1a0; color: #111; }
+  &:hover { background: #007bff; color: #111; }
 `;
 const FooterLang = styled.button`
   border: 2px solid #fff;
@@ -82,25 +82,6 @@ const VisitBtn = styled.a`
   transition: background 0.2s, color 0.2s;
   &:hover { background: #007bff; color: #111; }
 `;
-const RefreshBtn = styled.button`
-  position: absolute;
-  right: 32px;
-  bottom: 32px;
-  background: #fff;
-  color: #111;
-  border-radius: 16px;
-  width: 48px;
-  height: 48px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: background 0.2s, color 0.2s;
-  &:hover { background: #007bff; color: #111; }
-`;
 
 const Footer = () => {
   return (
@@ -108,17 +89,15 @@ const Footer = () => {
       <FooterContent>
         <FooterLogo>LCK.GG</FooterLogo>
         <FooterSNS>
-          <SNSIcon href="#" aria-label="페이스북"><FaFacebookF /></SNSIcon>
-          <SNSIcon href="#" aria-label="인스타그램"><FaInstagram /></SNSIcon>
-          <SNSIcon href="#" aria-label="트위터"><FaTwitter /></SNSIcon>
-          <SNSIcon href="#" aria-label="이메일"><FaEnvelope /></SNSIcon>
-          <SNSIcon href="#" aria-label="유튜브"><FaYoutube /></SNSIcon>
+          <SNSIcon href="https://www.facebook.com/officiallck" aria-label="페이스북"><FaFacebookF /></SNSIcon>
+          <SNSIcon href="https://www.instagram.com/lckofficial" aria-label="인스타그램"><FaInstagram /></SNSIcon>
+          <SNSIcon href="https://x.com/lck" aria-label="트위터"><FaTwitter /></SNSIcon>
+          <SNSIcon href="https://www.youtube.com/@LCK" aria-label="유튜브"><FaYoutube /></SNSIcon>
         <FooterLang>한국어</FooterLang>
         </FooterSNS>
         <FooterCopyright>Copyright © LCK.GG, Inc.</FooterCopyright>
       </FooterContent>
       <VisitBtn href="https://lolesports.com" target="_blank" rel="noopener noreferrer">↗ 사이트 방문</VisitBtn>
-      <RefreshBtn onClick={()=>window.location.reload()}><FaSyncAlt /></RefreshBtn>
     </FooterBg>
   );
 };
