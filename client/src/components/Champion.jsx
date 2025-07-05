@@ -47,12 +47,12 @@ const ChampName = styled.div`
   margin-bottom: 8px;
 `;
 const ChampTitle = styled.div`
-  color: #4ee1a0;
+  color: #007bff;
   font-size: 0.98rem;
   margin-bottom: 6px;
 `;
 const LoadingMsg = styled.div`
-  color: #4ee1a0;
+  color: #007bff;
   text-align: center;
   margin-top: 32px;
 `;
@@ -84,7 +84,7 @@ const PageBtn = styled.button`
     cursor: not-allowed;
   }
   &.active {
-    background: #4ee1a0;
+    background: #007bff;
     color: #111;
   }
 `;
