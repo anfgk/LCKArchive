@@ -5,6 +5,7 @@ import Team from "./components/Team";
 import Search from "./components/Search";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot";
+import Champion from "./components/Champion";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -58,6 +59,9 @@ function App() {
       <Main />
       <section id="team-section">
         <Team />
+      </section>
+      <section id="champion-section">
+        <Champion />
       </section>
       <section
         id="search-section"

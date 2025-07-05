@@ -109,7 +109,6 @@ const Main = () => {
         <Menu>
           <li className="active">홈</li>
           <li onClick={handleScrollToTeam} style={{cursor:'pointer'}}>팀</li>
-          <li>일정</li>
           <li>챔피언</li>
           <li>커뮤니티</li>
         </Menu>
