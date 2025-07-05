@@ -1,212 +1,139 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { main } from "../assets/main";
 
-const MainSection = styled.section`
-  padding-top: 100px;
-  position: relative;
-  overflow: hidden;
+const MainBg = styled.div`
+  min-height: 100vh;
+  background: #111;
+  color: #fff;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 `;
 
-const SliderContainer = styled.div`
-  position: relative;
+const Nav = styled.nav`
   width: 100%;
-  height: 65vh;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  @media screen and (max-width: 768px) {
-    height: 400px;
-  }
-
-  @media screen and (max-width: 480px) {
-    height: 300px;
-  }
+  justify-content: space-between;
+  padding: 32px 0 0 0;
 `;
 
-const SlideWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+const Logo = styled.div`
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
 `;
 
-const SlideContainer = styled.div`
+const Menu = styled.ul`
   display: flex;
-  width: ${props => props.$totalSlides * 100}%;
-  height: 100%;
-  transform: translateX(-${props => props.$currentSlide * (100 / props.$totalSlides)}%);
-  transition: transform 0.5s ease-in-out;
-`;
-
-const Slide = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
-
-const SlideImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-`;
-
-
-const NavButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.8);
-    transform: translateY(-50%) scale(1.1);
+  gap: 32px;
+  list-style: none;
+  li {
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.85;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: border 0.2s, color 0.2s;
   }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 40px;
-    height: 40px;
+  .active {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    opacity: 1;
   }
 `;
 
-const PrevButton = styled(NavButton)`
-  left: 20px;
-`;
-
-const NextButton = styled(NavButton)`
-  right: 20px;
-`;
-
-
-
-const SlideOverlay = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 150px;
-  padding-top: 30px;
-`;  
-
-const Title = styled.h2`
-  font-size: 2.5rem;
-  font-weight: bold;
-
-`;
-
-const Des = styled.div`
+const Center = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  margin: 40px 0 20px 0;
 `;
 
-const Subtitle = styled.p`
-  font-size: 1.2rem;
+const MainTitle = styled.h1`
+  font-size: 3.2rem;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 18px;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  padding-top: 10px;
+const MainTitleAccent = styled.span`
+  display: inline-block;
+  background: linear-gradient(90deg, #4ee1a0 30%, #1fa2ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 `;
 
-const Button = styled.button`
-  background-color: #000;
-  color: #fff;
-  padding: 10px 20px;
-  border: 1px solid #fff;
+const SubText = styled.div`
+  font-size: 1.15rem;
+  color: #bbb;
+  text-align: center;
+  max-width: 600px;
 `;
 
-const SecondButton = styled.button`
-  background-color: #fff;
-  color: #000;
-  padding: 10px 20px;
-  border: 1px solid #000;
+const SlideWrap = styled.div`
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #181818;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+  position: relative;
 `;
 
+const SlideVideo = styled.video`
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+`;
 
 const Main = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % main.length);
+  // Team 섹션으로 스크롤하는 함수
+  const handleScrollToTeam = () => {
+    const teamSection = document.getElementById('team-section');
+    if (teamSection) {
+      teamSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + main.length) % main.length);
-  };
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
-  // 자동 슬라이드
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [currentSlide]);
 
   return (
-    <MainSection>
-      <SliderContainer>
-        <SlideWrapper>
-          <SlideContainer $currentSlide={currentSlide} $totalSlides={main.length}>
-            {main.map((team, index) => (
-              <Slide key={team.id}>
-                <SlideImage 
-                  src={team.img} 
-                  alt={team.Team} 
-                />
-              </Slide>
-            ))}
-          </SlideContainer>
-        </SlideWrapper>
-
-        <PrevButton onClick={prevSlide} aria-label="Previous slide">
-          <FaChevronLeft />
-        </PrevButton>
-        
-        <NextButton onClick={nextSlide} aria-label="Next slide">
-          <FaChevronRight />
-        </NextButton>
-
-      </SliderContainer>
-        <SlideOverlay>
-          <Title>LCK와 <br /> 함께하는 E-Sports</Title>
-          <Des>
-          <Subtitle>LCK는 최고의 팀과 선수들이 모인 리그입니다. <br /> 당신의 게임 여정을 함께하며 승리를 향해 나아가세요!</Subtitle>
-          <ButtonContainer>
-          <Button>자세히 보기</Button>
-          <SecondButton>가입하기</SecondButton>
-          </ButtonContainer>
-          </Des>
-        </SlideOverlay>
-    </MainSection>
+    <MainBg>
+      <Nav>
+        <Logo>LCK.GG</Logo>
+        <Menu>
+          <li className="active">홈</li>
+          <li onClick={handleScrollToTeam} style={{cursor:'pointer'}}>팀</li>
+          <li>일정</li>
+          <li>챔피언</li>
+          <li>커뮤니티</li>
+        </Menu>
+      </Nav>
+      <Center>
+        <MainTitle>
+          LCK의 <MainTitleAccent>모든 순간</MainTitleAccent>을<br />
+          경험하세요
+        </MainTitle>
+        <SubText>
+          최고의 팀과 선수들이 펼치는 감동의 무대, 지금 바로 함께하세요.<br />
+          당신의 게임 여정에 LCK가 함께합니다.
+        </SubText>
+      </Center>
+      <SlideWrap>
+        <SlideVideo
+          src="/videos/lck.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </SlideWrap>
+    </MainBg>
   );
 };
 

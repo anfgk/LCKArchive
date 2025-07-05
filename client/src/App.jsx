@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import Header from "./components/Header";
 import Main from "./components/Main";
 import Team from "./components/Team";
 import Search from "./components/Search";
@@ -56,9 +55,10 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
       <Main />
-      <Team />
+      <section id="team-section">
+        <Team />
+      </section>
       <section
         id="search-section"
         style={{

@@ -337,24 +337,24 @@ const Search = () => {
           <RankInfo>
             {playerData.rankInfo && playerData.rankInfo.length > 0 ? (
               playerData.rankInfo.map((rank, index) => (
-                <RankCard key={index}>
-                  <h3>
-                    {rank.queueType === "RANKED_SOLO_5x5"
-                      ? "솔로 랭크"
-                      : "자유 랭크"}
-                  </h3>
-                  <p>
-                    티어: {rank.tier} {rank.rank}
-                  </p>
-                  <p>리그 포인트: {rank.leaguePoints}LP</p>
-                  <p>
-                    승/패: {rank.wins}승 {rank.losses}패
-                  </p>
-                  <p>
-                    승률:{" "}
-                    {((rank.wins / (rank.wins + rank.losses)) * 100).toFixed(1)}%
-                  </p>
-                </RankCard>
+              <RankCard key={index}>
+                <h3>
+                  {rank.queueType === "RANKED_SOLO_5x5"
+                    ? "솔로 랭크"
+                    : "자유 랭크"}
+                </h3>
+                <p>
+                  티어: {rank.tier} {rank.rank}
+                </p>
+                <p>리그 포인트: {rank.leaguePoints}LP</p>
+                <p>
+                  승/패: {rank.wins}승 {rank.losses}패
+                </p>
+                <p>
+                  승률:{" "}
+                  {((rank.wins / (rank.wins + rank.losses)) * 100).toFixed(1)}%
+                </p>
+              </RankCard>
               ))
             ) : (
               <RankCard>
