@@ -101,6 +101,13 @@ const Main = () => {
       teamSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  // 챔피언 섹션으로 스크롤하는 함수
+  const handleScrollToChampion = () => {
+    const championSection = document.getElementById('champion-section');
+    if (championSection) {
+      championSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <MainBg>
@@ -109,7 +116,7 @@ const Main = () => {
         <Menu>
           <li className="active">홈</li>
           <li onClick={handleScrollToTeam} style={{cursor:'pointer'}}>팀</li>
-          <li>챔피언</li>
+          <li onClick={handleScrollToChampion} style={{cursor:'pointer'}}>챔피언</li>
           <li>커뮤니티</li>
         </Menu>
       </Nav>

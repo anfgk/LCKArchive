@@ -5,7 +5,7 @@ const Wrapper = styled.section`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 0 80px 0;
+  padding: 10px 0 80px 0;
   color: #fff;
 `;
 const Title = styled.h2`
@@ -73,8 +73,8 @@ const PageBtn = styled.button`
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 1rem;
+  padding: 8px 14px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
