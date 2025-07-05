@@ -117,7 +117,7 @@ const Main = () => {
           <li className="active">홈</li>
           <li onClick={handleScrollToTeam} style={{cursor:'pointer'}}>팀</li>
           <li onClick={handleScrollToChampion} style={{cursor:'pointer'}}>챔피언</li>
-          <li>커뮤니티</li>
+          <li>전적기록</li>
         </Menu>
       </Nav>
       <Center>

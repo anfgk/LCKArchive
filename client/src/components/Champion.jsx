@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import ChampionModal from "./ChampionModal";
 
 const Wrapper = styled.section`
   width: 100%;
@@ -28,6 +29,7 @@ const Card = styled.div`
   align-items: center;
   box-shadow: 0 2px 12px rgba(0,0,0,0.12);
   min-height: 200px;
+  cursor: pointer;
   &:hover {
     transform: scale(1.08);
     transition: transform 0.3s ease;
@@ -90,6 +92,7 @@ const PageBtn = styled.button`
 `;
 
 const CHAMPION_API = "https://ddragon.leagueoflegends.com/cdn/14.12.1/data/ko_KR/champion.json";
+const CHAMPION_DETAIL_API = (id) => `https://ddragon.leagueoflegends.com/cdn/14.12.1/data/ko_KR/champion/${id}.json`;
 const CHAMPION_IMG = (filename) => `https://ddragon.leagueoflegends.com/cdn/14.12.1/img/champion/${filename}`;
 const CHAMPS_PER_PAGE = 15;
 
@@ -98,6 +101,9 @@ const Champion = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
+  const [modalChamp, setModalChamp] = useState(null); // {id, data}
+  const [modalLoading, setModalLoading] = useState(false);
+  const [modalError, setModalError] = useState(null);
 
   useEffect(() => {
     const fetchChampions = async () => {
@@ -123,6 +129,24 @@ const Champion = () => {
   const endIdx = startIdx + CHAMPS_PER_PAGE;
   const currentChamps = champions.slice(startIdx, endIdx);
 
+  // 모달 열기: 챔피언 상세 fetch
+  const openModal = async (champ) => {
+    setModalLoading(true);
+    setModalError(null);
+    setModalChamp({id: champ.id, data: null});
+    try {
+      const res = await fetch(CHAMPION_DETAIL_API(champ.id));
+      if (!res.ok) throw new Error("상세 정보 요청 실패");
+      const data = await res.json();
+      setModalChamp({id: champ.id, data: data.data[champ.id]});
+    } catch (e) {
+      setModalError("상세 정보를 불러오지 못했습니다.");
+    } finally {
+      setModalLoading(false);
+    }
+  };
+  const closeModal = () => setModalChamp(null);
+
   return (
     <Wrapper id="champion-section">
       <Title>리그 오브 레전드 챔피언</Title>
@@ -132,7 +156,7 @@ const Champion = () => {
         <>
           <Grid>
             {currentChamps.map((champ) => (
-              <Card key={champ.key}>
+              <Card key={champ.key} onClick={() => openModal(champ)}>
                 <ChampImg src={CHAMPION_IMG(champ.image.full)} alt={champ.name} />
                 <ChampName>{champ.name}</ChampName>
                 <ChampTitle>{champ.title}</ChampTitle>
@@ -153,6 +177,15 @@ const Champion = () => {
             <PageBtn onClick={() => setPage(page+1)} disabled={page === totalPages}>&gt;</PageBtn>
           </Pagination>
         </>
+      )}
+      {/* 모달 */}
+      {modalChamp && (
+        <ChampionModal
+          champData={modalChamp.data}
+          loading={modalLoading}
+          error={modalError}
+          onClose={closeModal}
+        />
       )}
     </Wrapper>
   );
