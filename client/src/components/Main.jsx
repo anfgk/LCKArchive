@@ -94,7 +94,7 @@ const SlideVideo = styled.video`
 `;
 
 const Main = () => {
-  // Team 섹션으로 스크롤하는 함수
+  // 팀 섹션으로 스크롤하는 함수
   const handleScrollToTeam = () => {
     const teamSection = document.getElementById('team-section');
     if (teamSection) {
@@ -108,6 +108,13 @@ const Main = () => {
       championSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  // 전적기록(검색) 섹션으로 스크롤하는 함수
+  const handleScrollToSearch = () => {
+    const searchSection = document.getElementById('search-section');
+    if (searchSection) {
+      searchSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <MainBg>
@@ -117,7 +124,7 @@ const Main = () => {
           <li className="active">홈</li>
           <li onClick={handleScrollToTeam} style={{cursor:'pointer'}}>팀</li>
           <li onClick={handleScrollToChampion} style={{cursor:'pointer'}}>챔피언</li>
-          <li>전적기록</li>
+          <li onClick={handleScrollToSearch} style={{cursor:'pointer'}}>전적기록</li>
         </Menu>
       </Nav>
       <Center>
