@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaSyncAlt } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube} from "react-icons/fa";
 
 const FooterBg = styled.footer`
   width: 100vw;
