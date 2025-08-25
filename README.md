@@ -1,50 +1,114 @@
-# 🎮 LCKArchive
+## 프로젝트 소개
 
-## 프로젝트에 대한 소개
-LCKArchive는 리그 오브 레전드 게이머와 LCK 팬들을 위한 종합 정보 플랫폼입니다. 
-이 프로젝트는 Riot Games API를 활용하여 플레이어의 게임 정보를 실시간으로 조회하고 제공하는 웹 애플리케이션입니다.
+LCKArchive는 LCK 팬과 LoL 게이머를 위한 React 기반 SPA로, 팀·선수·챔피언 및 전적 정보를 빠르게 탐색할 수 있도록 설계했습니다. Riot Games API 연동으로 실시간에 가까운 데이터 조회를 제공하며, 모달 중심의 탐색 흐름과 가벼운 번들(Vite)로 쾌적한 사용자 경험을 목표로 했습니다.
 
-## 프로젝트를 만들게 된 이유
-LCK (League of Legends Champions Korea)는 한국의 최고 수준 리그 오브 레전드 프로 리그로, 전 세계적으로 많은 팬들을 보유하고 있습니다.
-이러한 다양한 동기들이 결합되어 LCKArchive 프로젝트가 탄생하게 되었으며, 단순한 학습 프로젝트를 넘어서 지속적인 업그레이드를 하며 실제 사용자들에게 가치를 제공하는 서비스로 발전시켜 나가고 싶습니다.
+## 주요 목표
 
-## 🕰️ 개발기간
-2025.04.14 ~ 2025.05.02
+- 팀/선수/챔피언 탐색 흐름과 검색 UX 설계
+- Riot Games API 연동 및 전적 조회 로직 구현
+- 반응형 UI와 경량 번들 환경(Vite) 구성
 
-## 🌎 Tech
-React, Vite, Styled-components, React Router DOM, Axios
+## 기술 스택
 
-## 🖥️ Other Skill
-Render, Git, GitHub, Riot Games API, Express.js, dotenv, Node.js
+- **런타임/언어**: JavaScript (ES6+)
+- **프레임워크**: React
+- **번들러**: Vite
+- **라우팅**: React Router DOM
+- **요청/상태**: Axios (요청), 커스텀 훅 기반 상태 분리
+- **스타일**: styled-components, styled-reset
+- **백엔드**: Node.js, Express, dotenv, CORS
+- **배포**: Render (정적 파일 서빙 + 서버 프록시)
 
-## 💡 문제점 / 해결 방법
-1. API 요청 중복 문제
- - 원인: GameData.jsx와 Search.jsx 컴포넌트에서 동일한 API 요청 로직이 중복 구현되어 있어 불필요한 서버 요청 발생
- - 해결: API 요청 로직을 커스텀 훅으로 분리하여 재사용 가능한 형태로 리팩토링
-   
-2. 환경변수 설정 문제
- - 원인: 로컬 개발 환경과 배포 환경에서 API_BASE_URL이 하드코딩되어 있어 환경별 설정이 어려움
- - 해결: .env 파일을 통해 환경변수를 관리하고, 환경에 따라 자동으로 적절한 URL 사용하도록 수정
+## 기능 요약
 
-3. 에러 처리 일관성 문제
- - 원인: 각 컴포넌트마다 다른 방식의 에러 처리 로직 사용
- - 해결: 중앙화된 에러 처리 유틸리티를 만들어 일관된 에러 메시지와 처리 방식 적용
+- **검색/탐색**: 팀·선수·챔피언을 카드/리스트로 탐색, 모달 상세 표시
+- **전적 조회**: 소환사/경기 데이터 요청 및 지표 표시(`GameData.jsx`)
+- **선수 정보**: 선수별 정보 요약 및 하이라이트(`PlayerInfo.jsx`)
+- **챔피언 뷰**: 챔피언 카드와 상세 모달(`Champion.jsx`, `ChampionModal.jsx`)
+- **UX 보조**: 로딩/에러 상태, 기본 예외 처리, 반응형 레이아웃
 
-4. 데이터 캐싱 문제
- - 원인: 동일한 소환사 검색 시에도 매번 새로운 API 요청 발생
- - 해결: React Query를 도입하여 데이터 캐싱 및 재검증 로직 구현
+## 페이지 구조
 
-5. 빌드 경로 문제
- - 원인: 클라이언트 빌드 파일의 경로가 서버에서 잘못 지정되어 있어 정적 파일 서빙 실패
- - 해결: server.js에서 정적 파일 경로를 ../client/dist로 수정
+- **Home** (`client/src/components/Main.jsx`): 랜딩 및 히어로(영상/이미지), 주요 진입 CTA
+- **Search** (`client/src/components/Search.jsx`): 검색 입력, 결과 리스트, 필터/정렬
+- **Team** (`client/src/components/Team.jsx` · `TeamModal.jsx`): 팀 목록, 상세 모달
+- **Champion** (`client/src/components/Champion.jsx` · `ChampionModal.jsx`): 챔피언 브라우징/상세
+- **GameData** (`client/src/components/GameData.jsx`): 전적/세부 지표
+- **PlayerInfo** (`client/src/components/PlayerInfo.jsx`): 선수 정보 요약
 
-6. 정적 자원 경로 문제
- - 원인: 이미지, 비디오 등의 정적 자원 경로가 잘못 설정되어 404 에러 발생
- - 해결: Vite의 public 디렉토리를 활용하여 정적 자원 경로 수정
+## 폴더 구조(요약)
 
-## ✅ 느낀점/배운점
-- **Riot Games API**를 활용해 **실제 서비스의 API 통신 구조와 인증 처리 방식**을 직접 경험
-- **React 컴포넌트의 재사용성과 최적화**의 중요성을 체감하며, **상태 관리 (State Management)** 및 비동기 처리 (Async Handling)에 대한 실전 경험 축적
-- 개발 과정에서 발생한 **에러 해결 경험**을 통해 **문제 해결 능력 (Debugging & Troubleshooting)** 강화
-- **배포 과정에서의 문제 해결 경험**을 통해 **개발 환경(Dev)과 운영 환경(Prod)의 차이점과 대응 방법**에 대한 이해도 향상
-- 프로젝트 완료 이후에도 **성능 최적화(Performance Tuning)** 및 코드 리팩토링(Code Refactoring)을 지속하며, 개발은 곧 **지속적인 개선의 과정**임을 체득
+```text
+client/
+  public/
+    img/              # 팀/선수/챔피언 로고·이미지
+    videos/           # 히어로 배경 영상(lck.mp4)
+  src/
+    assets/
+      team.js         # 팀 데이터
+      player.js       # 선수 데이터
+      chatbotResponses.js # 챗봇 응답 데이터
+    components/
+      Main.jsx
+      Search.jsx
+      Team.jsx
+      TeamModal.jsx
+      Champion.jsx
+      ChampionModal.jsx
+      GameData.jsx
+      PlayerInfo.jsx
+      Chatbot.jsx
+    App.jsx
+    main.jsx
+server/
+  server.js           # Express 서버, Riot API 프록시/환경변수
+```
+
+## 실행 방법
+
+```bash
+# 루트에서 의존성 설치(루트/클라이언트/서버)
+npm run install-all
+
+# 개발 서버 실행
+npm run dev:client    # Vite 개발 서버
+npm run dev:server    # nodemon로 Express 서버
+```
+
+## 빌드/배포
+
+- 개발: `npm run dev:client`, `npm run dev:server`
+- 빌드: `npm run build` (client 빌드 → `client/dist` 산출)
+- 실행: `npm start` (정적 파일 서빙 + API 프록시)
+- 배포: Render에 환경변수 설정 후 루트 `deploy` 스크립트로 자동화
+
+## 데이터/로직 개요
+
+- **정적 데이터**: `client/src/assets/team.js`, `player.js`, `chatbotResponses.js`
+- **API 연동**: 클라이언트는 `/api`로 호출 → Vite 프록시(`client/vite.config.js`) → 서버(`server/server.js`) → Riot API
+- **결과 표시**: 컴포넌트 단위로 지표 렌더링, 에러/로딩 상태 일원화
+
+## 스크린샷/에셋
+
+- 이미지: `client/public/img/` (팀 로고, 선수/챔피언 이미지, `lck.svg` 등)
+- 영상: `client/public/videos/lck.mp4` (메인 히어로 배경)
+
+## 접근성/UX 고려
+
+- 키보드 포커스 가능한 주요 CTA와 모달 포커스 트랩 고려
+- 이미지 대체 텍스트 제공(필요 시 지속 보완)
+- 모바일 퍼스트 레이아웃, 가독성 높은 타이포 조정
+
+## 개선 아이디어(향후 계획)
+
+- URL 쿼리 기반 공유/딥링크(검색/선수/챔피언 상태 영속화)
+- 데이터 캐싱 고도화(React Query 도입, 재검증/Prefetch)
+- 코드 스플리팅 및 이미지 최적화(WebP/적응형 로딩)
+- 유닛 테스트 도입(API/파서/정렬 로직 검증)
+- 접근성 강화(모달 ARIA 속성, 키보드 내비 개선)
+
+## 회고
+
+- 라우팅·상태·데이터 주도 UI를 일관된 흐름으로 연결
+- 서버 프록시/배포까지 포함해 실사용 환경 전 과정을 경험
+- 공통 로직 훅 분리와 에러 처리 일관화로 유지보수성 향상
