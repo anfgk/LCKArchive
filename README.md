@@ -10,14 +10,7 @@ LCKArchive는 LCK 팬과 LoL 게이머를 위한 React 기반 SPA로, 팀·선�
 
 ## 기술 스택
 
-- **런타임/언어**: JavaScript (ES6+)
-- **프레임워크**: React
-- **번들러**: Vite
-- **라우팅**: React Router DOM
-- **요청/상태**: Axios (요청), 커스텀 훅 기반 상태 분리
-- **스타일**: styled-components, styled-reset
-- **백엔드**: Node.js, Express, dotenv, CORS
-- **배포**: Render (정적 파일 서빙 + 서버 프록시)
+`JavaScript` `React` `Vite` `React Router DOM` `Axios` `styled-components` `styled-reset` `Node.js` `Express` `dotenv` `CORS` `Render`
 
 ## 기능 요약
 
@@ -112,3 +105,4 @@ npm run dev:server    # nodemon로 Express 서버
 - 라우팅·상태·데이터 주도 UI를 일관된 흐름으로 연결
 - 서버 프록시/배포까지 포함해 실사용 환경 전 과정을 경험
 - 공통 로직 훅 분리와 에러 처리 일관화로 유지보수성 향상
+
