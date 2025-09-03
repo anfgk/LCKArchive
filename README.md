@@ -44,11 +44,12 @@ npm run dev:server    # nodemon로 Express 서버
 - 개발: `npm run dev:client`, `npm run dev:server`
 - 빌드: `npm run build` (client 빌드 → `client/dist` 산출)
 - 실행: `npm start` (정적 파일 서빙 + API 프록시)
+- 배포: vercel에 환경변수 설정 후 루트 deploy 스크립트로 자동화
 
 ## 데이터/로직 개요
 
 - **정적 데이터**: `client/src/assets/team.js`, `player.js`, `chatbotResponses.js`
-- API 연동: 클라이언트는 /api로 호출 → Vite 프록시(client/vite.config.js) → 서버(server/server.js) → Riot API
+- **API 연동**: 클라이언트는 /api로 호출 → Vite 프록시(client/vite.config.js) → 서버(server/server.js) → Riot API
 - **결과 표시**: 컴포넌트 단위로 지표 렌더링, 에러/로딩 상태 일원화
 
 ## 스크린샷/에셋
