@@ -13,7 +13,7 @@ if (!RIOT_API_KEY) {
   process.exit(1);
 }
 
-console.log("Using API Key:", RIOT_API_KEY); // API 키 확인
+// 배포 환경 보안을 위해 API Key는 로그에 출력하지 않습니다.
 
 app.use(cors());
 app.use(express.json());
@@ -124,8 +124,6 @@ app.get("/api/player-data/:gameName/:tagLine", async (req, res) => {
 
   console.log("\n=== 새로운 검색 요청 ===");
   console.log("검색 정보:", { gameName, tagLine });
-  console.log("API Key:", RIOT_API_KEY);
-  console.log("Headers:", riotHeaders);
 
   try {
     // 1. 계정 정보 조회
