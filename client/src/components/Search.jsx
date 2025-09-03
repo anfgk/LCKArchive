@@ -2,8 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import "./Search.css";
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+import { API_BASE_URL, API_ENDPOINTS } from "../assets/config";
 
 const SearchContainer = styled.div`
   width: 100%;
@@ -258,10 +257,10 @@ const Search = () => {
 
       const [playerResponse, matchesResponse] = await Promise.all([
         axios.get(
-          `${API_BASE_URL}/api/player-data/${encodedGameName}/${encodedTagLine}`
+          `${API_BASE_URL}${API_ENDPOINTS.PLAYER_DATA}?gameName=${encodedGameName}&tagLine=${encodedTagLine}`
         ),
         axios.get(
-          `${API_BASE_URL}/api/matches/${encodedGameName}/${encodedTagLine}`
+          `${API_BASE_URL}${API_ENDPOINTS.MATCHES}?gameName=${encodedGameName}&tagLine=${encodedTagLine}`
         ),
       ]);
 
